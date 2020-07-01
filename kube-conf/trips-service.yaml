@@ -8,23 +8,23 @@ metadata:
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: poi-deployment
+  name: trips-deployment
   namespace: api-ns
   labels:
-    app: poi
+    app: trips
 spec:
   replicas: 1
   selector:
     matchLabels:
-      app: poi
+      app: trips
   template:
     metadata:
       labels:
-        app: poi
+        app: trips
     spec:
       containers:
-      - name: poi
-        image: registryanm5076.azurecr.io/poi:latest
+      - name: trips
+        image: registryanm5076.azurecr.io/trips:latest
         ports:
         - containerPort: 80
         env:
@@ -36,17 +36,15 @@ spec:
           value: "sqlserveranm5076.database.windows.net"
         - name: SQL_DBNAME
           value: "mydrivingDB"
-        - name: ASPNETCORE_ENVIRONMENT
-          value: "Development"
 ---
 apiVersion: v1
 kind: Service
 metadata:
-  name: poi-service
+  name: trips-service
   namespace: api-ns
 spec:
   selector:
-    app: poi
+    app: trips
   ports:
     - protocol: TCP
       port: 80

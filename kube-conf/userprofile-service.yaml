@@ -1,7 +1,15 @@
+apiVersion: v1
+kind: Namespace
+metadata:
+  name: api-ns
+  labels:
+    namespace: api-ns
+---
 apiVersion: apps/v1
 kind: Deployment
 metadata:
   name: userprofile-deployment
+  namespace: api-ns
   labels:
     app: userprofile
 spec:
@@ -33,6 +41,7 @@ apiVersion: v1
 kind: Service
 metadata:
   name: userprofile-service
+  namespace: api-ns
 spec:
   selector:
     app: userprofile
